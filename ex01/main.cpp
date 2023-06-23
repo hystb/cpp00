@@ -17,6 +17,7 @@ int	main(void)
 {
 	std::string	buff;
 	PhoneBook list;
+	int	index = 0;
 
 	while (1)
 	{
@@ -27,6 +28,17 @@ int	main(void)
 		if (buff == "SEARCH")
 		{
 			list.showList(list.list);
+			std::cout << "Please enter an index" << std::endl;
+			while (index <= 0 || index > list.nbContact)
+			{			
+				std::getline(std::cin, buff);
+				std::istringstream iss(buff);
+				iss >> index;
+				if (index > 0 && index <= list.nbContact)
+					list.showOne(list.list, index);
+				else
+					std::cout << "Please enter a correct index" << std::endl;
+			}
 		}
 		if (buff == "EXIT" || std::cin.eof())
 		{

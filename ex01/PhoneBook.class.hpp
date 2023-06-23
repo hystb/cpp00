@@ -15,11 +15,11 @@
 
 # include "Contact.class.hpp"
 # include <iomanip>
+# include <string>
+# include <sstream> 
 
 class PhoneBook
 {
-private:
-	/* data */
 public:
 	PhoneBook(void);
 	~PhoneBook();
@@ -27,7 +27,8 @@ public:
 	int		nbContact;
 	void	showList(Contact *list);
 	void	addContact(Contact *list);
-	
+	std::string	showTen(std::string str);
+	void	showOne(Contact *list, int index);
 };
 
 # endif

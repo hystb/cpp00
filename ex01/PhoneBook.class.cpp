@@ -22,17 +22,23 @@ PhoneBook::~PhoneBook(void){
 void	PhoneBook::addContact(Contact *element){
 	
 	static int	i = 0;
+	std::string	tmp;
 	
 	std::cout << "Please enter the first name" << std::endl;
-	std::getline (std::cin, element[i].firstName);
+	std::getline (std::cin, tmp);
+	element[i].setFirstName(tmp);
 	std::cout << "Please enter the last name" << std::endl;
-	std::getline (std::cin, element[i].lastName);
+	std::getline (std::cin, tmp);
+	element[i].setLastName(tmp);
 	std::cout << "Please enter the nickname" << std::endl;
-	std::getline (std::cin, element[i].nickname);
+	std::getline (std::cin, tmp);
+	element[i].setNickname(tmp);
 	std::cout << "Please enter the phone number" << std::endl;
-	std::getline (std::cin, element[i].phoneNumber);
+	std::getline (std::cin, tmp);
+	element[i].setPhoneNumber(tmp);
 	std::cout << "Please enter the darkest secret" << std::endl;
-	std::getline (std::cin, element[i].darkestSecret);
+	std::getline (std::cin, tmp);
+	element[i].setDarkSecret(tmp);
 	i++;
 	if (this->nbContact < 8)
 		this->nbContact++;
@@ -61,14 +67,34 @@ void	PhoneBook::showList(Contact *list){
 		std::cout << std::setw(10);
 		std::cout << (i + 1);
 		std::cout << "|";
-		std::cout << std::setw(10) << list[i].firstName;
+		std::cout << std::setw(10);
+		std::cout << this->showTen(list[i].getFirstName());
 		std::cout << "|";
 		std::cout << std::setw(10);
-		std::cout << list[i].lastName;
+		std::cout << this->showTen(list[i].getLastName());
 		std::cout << "|";
 		std::cout << std::setw(10);
-		std::cout << list[i].nickname;
+		std::cout << this->showTen(list[i].getNickname());
 		std::cout << "|" << std::endl;
 		i++;
 	}
+}
+void	PhoneBook::showOne(Contact *list, int index){
+	
+	if (index > 0 && index <= 8 && index <= this->nbContact)
+	{
+		index--;
+		std::cout << "Index : " << index + 1 << std::endl;
+		std::cout << "First Name : " << this->showTen(list[index].getFirstName()) << std::endl;
+		std::cout << "Last Name : " << this->showTen(list[index].getLastName()) << std::endl;
+		std::cout << "Nickname : " << this->showTen(list[index].getNickname()) << std::endl;
+		std::cout << "Phone Number : " << this->showTen(list[index].getPhoneNumber()) << std::endl;
+		std::cout << "Darkest Secret : " << this->showTen(list[index].getDarkSecret()) << std::endl;
+	}
+	return;
+}
+std::string PhoneBook::showTen(std::string str) {
+		if(str.size() >= 10)
+			return (str.substr(0,9) + ".");
+		return (str);
 }
