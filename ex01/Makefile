@@ -5,8 +5,6 @@ CFLAGS 		= -Wall -Wextra -Werror -std=c++98
 
 NAME 		= phoneBook
 #---------------------------------------------------#
-OBJ_DIR 	= obj/
-
 SRCS		= \
 main.cpp\
 Contact.class.cpp\
@@ -14,7 +12,7 @@ PhoneBook.class.cpp\
 
 OBJ_DIR 	= .obj
 
-OBJS		= $(SRCS:%.c=$(OBJ_DIR)/%.o)
+OBJS		= $(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 
 HEADERS		= \
 Contact.class.hpp\
@@ -26,7 +24,7 @@ all:
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-$(OBJ_DIR)/%.o : %.c $(HEADERS)
+$(OBJ_DIR)/%.o : %.cpp $(HEADERS)
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) -c $< -o $@
 
